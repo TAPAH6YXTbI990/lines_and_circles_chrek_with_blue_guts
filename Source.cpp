@@ -9,7 +9,7 @@ int main()
 {
     std::system("chcp 65001 > nul");
 
-    std::string image_path = "C:/Users/User/.vscode/projects/open_guts.jpg"; 
+    std::string image_path = "C:/Users/User/.vscode/projects/OpenShrek.jpg"; 
    
     Mat img = imread(image_path);
 
@@ -19,12 +19,7 @@ int main()
         return -1; 
     }
 
-    int down_width = 500;
-    int down_height = 500;
-
-    resize(img, img, Size(down_width, down_height), INTER_LINEAR); 
-
-    Mat grayImg, hsvImg, labImg, xyzImg, edges, mask, result;
+    Mat grayImg, hsvImg, labImg, xyzImg, edges;
 
     cvtColor(img, grayImg, COLOR_BGR2GRAY);
     cvtColor(img, hsvImg, COLOR_BGR2HSV);
@@ -58,14 +53,7 @@ int main()
         circle(img, center, radius, Scalar(255, 0, 0), 2, LINE_AA); 
     }
     
-
-    inRange(hsvImg, Scalar(100, 150, 0), Scalar(140, 255, 255), mask);
-
-    bitwise_and(img, img, result, mask);
-    
     imshow("OrigImg", img); 
-    imshow("Mask", mask);
-    imshow("Result", result); 
     imshow("Edges", edges);
     imshow("GrayImg", grayImg);
     imshow("HSVimg", hsvImg);
